@@ -74,3 +74,13 @@ The **RFID Based Attendance System with SMS Notification** provides a seamless, 
 ---
 
 **Language:** C/C++ (Arduino IDE)
+## Author
+
+**Siddharth Chandra Prabhakar**<br> 
+Final year B.Tech (Electronics & Communication Engineering) <br>
+National Institute of Technology Sikkim
+
+## License
+
+This project is open-source and available under the MIT License.
+
