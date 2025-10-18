@@ -84,10 +84,13 @@ Install the following libraries via **Library Manager**:
 - Battery backup integration  
 
 ---
+## Author
 
-## Developed By
-**Siddharth Chandra Prabhakar**
-Final Year Undergraduate <br>
-National Institute of Technology Sikkim 
-**Tech Stack:** Arduino IDE, ESP8266, SIM800L, PN532, LCD (I2C), LM2596, Buzzer, Excel <br>  
-**Language:** C/C++ (Arduino IDE)
+**Siddharth Chandra Prabhakar**<br> 
+Final year B.Tech (Electronics & Communication Engineering) <br>
+National Institute of Technology Sikkim
+
+## License
+
+This project is open-source and available under the MIT License.
+
