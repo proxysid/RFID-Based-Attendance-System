@@ -86,8 +86,8 @@ Install the following libraries via **Library Manager**:
 ---
 
 ## Developed By
-**Siddharth Chandra Prabhakar** <br>  
+**Siddharth Chandra Prabhakar**
 Final Year Undergraduate <br>
-National Institute of Technology Sikkim <br>
+National Institute of Technology Sikkim 
 **Tech Stack:** Arduino IDE, ESP8266, SIM800L, PN532, LCD (I2C), LM2596, Buzzer, Excel <br>  
 **Language:** C/C++ (Arduino IDE)
