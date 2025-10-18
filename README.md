@@ -1,86 +1,93 @@
 # RFID Based Attendance System with SMS Notification
 
 ## Overview
+The **RFID Based Attendance System with SMS Notification and Excel Logging** is a smart, automated IoT project designed to simplify attendance tracking. Using **RFID/NFC**, **SIM800L GSM**, and **Excel integration**, it not only records attendance automatically but also sends an **instant SMS notification** and **logs the data into an Excel sheet** via serial communication.
 
-The **RFID Based Attendance System with SMS Notification** is an efficient and automated attendance management solution designed to simplify record-keeping in educational and organizational environments. This project enhances the traditional RFID-based attendance mechanism by integrating an SMS notification feature using the **SIM800L GSM module**, allowing instant alerts to be sent when attendance is marked.
-
-## Description
-
-This system is developed using **Arduino IDE** and incorporates hardware components such as **ESP32**, **RFID reader**, **SIM800L GSM module**, and **RTC (Real-Time Clock) module**. Each student, faculty, or staff member is assigned a unique RFID tag. When the tag is placed near the reader, it transmits its unique identification number (UIN), which is captured and processed by the ESP32 microcontroller.
-
-The system:
-
-* Marks attendance automatically
-* Stores data in an **Excel sheet** for easy tracking and analysis
-* Sends an **SMS notification** to a predefined mobile number confirming attendance
-* Utilizes an **RTC module** to timestamp each attendance entry accurately
-
-This setup ensures quick, reliable, and paperless attendance management while keeping parents or administrators informed in real time.
-
-## Features
-
-* **Automated Attendance Logging:** RFID tags are scanned instantly without manual roll-calls.
-* **Real-Time SMS Alerts:** Uses the SIM800L module to send SMS notifications upon successful attendance marking.
-* **Accurate Time Stamping:** The RTC module provides precise date and time for each attendance entry.
-* **Data Storage:** Attendance data is recorded and stored in an Excel file via Arduino IDE serial communication.
-* **Error Handling:** Provides user feedback for invalid tags or communication errors.
-
-## Components Used
-
-* ESP32 Microcontroller
-* RFID Reader Module (RC522)
-* RFID Tags/Cards
-* SIM800L GSM Module
-* RTC Module (DS3231 or similar)
-* 16x2 LCD Display
-* Jumper Wires and Breadboard
-* Power Supply
-
-## Tech Stack
-
-* **Arduino IDE** – for code development and serial communication
-* **SIM800L** – for GSM-based SMS notification
-* **ESP32** – as the main controller for RFID and GSM communication
-* **RTC Module** – for maintaining accurate date and time records
-* **Excel (via PLX-DAQ)** – for attendance data storage and visualization
-
-## Working Principle
-
-1. Each RFID tag has a unique identification number stored in the system database.
-2. When the RFID tag is brought near the reader, it sends the tag’s UIN to the ESP32 microcontroller.
-3. The ESP32 verifies the ID, records attendance with a timestamp, and logs it into an Excel sheet.
-4. The SIM800L module sends an SMS notification indicating successful attendance marking.
-5. The LCD displays confirmation messages and real-time system updates.
-
-## Advantages
-
-* Fully automated and paperless attendance management
-* Real-time SMS notifications for transparency
-* Reliable and timestamped attendance data
-* Easy report generation through Excel
-* Suitable for schools, colleges, and workplaces
-
-## Future Enhancements
-
-* Integration with cloud databases for remote monitoring
-* Development of a web-based dashboard for attendance visualization
-* Implementation of biometric or face-recognition verification
-* IoT-based data synchronization for centralized access
-
-## Conclusion
-
-The **RFID Based Attendance System with SMS Notification** provides a seamless, real-time, and automated solution for managing attendance. By leveraging **ESP32**, **SIM800L**, and **RTC modules**, the system ensures accuracy, efficiency, and instant communication—revolutionizing attendance management in academic and professional institutions.
+This system is built using the **ESP8266 NodeMCU**, **PN532 NFC module**, **16x2 I2C LCD**, **SIM800L GSM module**, **LM2596 step-down converter**, and a **buzzer** for feedback.
 
 ---
 
+## Features
+- Automatic attendance using RFID/NFC tags  
+- Real-time SMS notification via GSM module  
+- Live data logging to Excel using PLX-DAQ  
+- LCD display showing attendance status  
+- Buzzer indication for successful scans  
+- Stable power regulation using LM2596  
+- Compact, efficient, and low-cost system  
+
+---
+
+## Components and Connections
+
+| Component | Description | Connected To (ESP8266 NodeMCU) |
+|------------|--------------|--------------------------------|
+| **PN532 NFC RFID Module** | Reads tag UID | SDA → D2, SCL → D1, VCC → 3.3V, GND → GND |
+| **LCD Display (16x2 with I2C)** | Displays messages | SDA → D2, SCL → D1, VCC → 3.3V, GND → GND |
+| **SIM800L GSM Module** | Sends SMS notifications | TX → D7 (RX), RX → D8 (TX), VCC → LM2596 output (~4V), GND → Common GND |
+| **LM2596 Step-Down Converter** | Powers GSM module | Input → 5V source, Output → 4V to SIM800L |
+| **Buzzer** | Feedback indicator | Positive → D6, Negative → GND |
+| **RFID Tags** | Used for user identification | Communicates with PN532 wirelessly |
+
+---
+
+## Tech Stack
+- **Microcontroller:** ESP8266 NodeMCU  
+- **Programming IDE:** Arduino IDE  
+- **Modules:** PN532, SIM800L GSM, LM2596  
+- **Display:** 16x2 I2C LCD  
+- **Data Logging:** Excel via PLX-DAQ  
+- **Feedback:** Buzzer tone  
+
+---
+
+## Working Principle
+1. The user scans their RFID tag on the PN532 reader.  
+2. The ESP8266 identifies the tag and displays the user’s ID on the LCD.  
+3. A buzzer beeps to confirm attendance.  
+4. The SIM800L sends an SMS alert indicating the attendance status.  
+5. Data (ID, Date, Time) is simultaneously sent to **Excel via PLX-DAQ** for storage.  
+
+---
+
+## Excel Logging Setup (PLX-DAQ)
+1. Download **PLX-DAQ v2** (Excel plugin for serial data logging).  
+2. Open Excel → Enable Macros → Open `PLX-DAQ Spreadsheet.xlsm`.  
+3. Set your COM port (same as Arduino Serial Port).  
+4. Start Data → Real-time attendance data will appear with **Name**, **Card ID**, **Date**, and **Time**.  
+
+---
+
+## Required Arduino Libraries
+Install the following libraries via **Library Manager**:
+- `Wire.h`
+- `LiquidCrystal_I2C.h`
+- `Adafruit_PN532.h`
+- `SoftwareSerial.h`
+
+---
+
+## How to Run
+1. Connect all components as per the circuit diagram below.  
+2. Open Arduino IDE → Select **NodeMCU 1.0 (ESP-12E Module)**.  
+3. Upload the code provided below.  
+4. Open PLX-DAQ in Excel and connect it to the correct COM port.  
+5. Scan RFID tags → Attendance will be displayed, logged in Excel, and SMS sent instantly.
+
+
+---
+
+## Future Enhancements
+- Integration with online cloud storage (Firebase, Google Sheets)  
+- Web dashboard for centralized attendance viewing  
+- Face recognition for enhanced verification  
+- Battery backup integration  
+
+---
+
+## Developed By
+**Siddharth Chandra Prabhakar** <br>  
+Final Year Undergraduate <br>
+National Institute of Technology Sikkim <br>
+**Tech Stack:** Arduino IDE, ESP8266, SIM800L, PN532, LCD (I2C), LM2596, Buzzer, Excel <br>  
 **Language:** C/C++ (Arduino IDE)
-## Author
-
-**Siddharth Chandra Prabhakar**<br> 
-Final year B.Tech (Electronics & Communication Engineering) <br>
-National Institute of Technology Sikkim
-
-## License
-
-This project is open-source and available under the MIT License.
-
