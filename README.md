@@ -5,8 +5,6 @@ The **RFID Based Attendance System with SMS Notification and Excel Logging** is 
 
 This system is built using the **ESP8266 NodeMCU**, **PN532 NFC module**, **16x2 I2C LCD**, **SIM800L GSM module**, **LM2596 step-down converter**, and a **buzzer** for feedback.
 
----
-
 ## Features
 - Automatic attendance using RFID/NFC tags  
 - Real-time SMS notification via GSM module  
@@ -15,8 +13,6 @@ This system is built using the **ESP8266 NodeMCU**, **PN532 NFC module**, **16x2
 - Buzzer indication for successful scans  
 - Stable power regulation using LM2596  
 - Compact, efficient, and low-cost system  
-
----
 
 ## Components and Connections
 
@@ -29,8 +25,6 @@ This system is built using the **ESP8266 NodeMCU**, **PN532 NFC module**, **16x2
 | **Buzzer** | Feedback indicator | Positive → D6, Negative → GND |
 | **RFID Tags** | Used for user identification | Communicates with PN532 wirelessly |
 
----
-
 ## Tech Stack
 - **Microcontroller:** ESP8266 NodeMCU  
 - **Programming IDE:** Arduino IDE  
@@ -39,8 +33,6 @@ This system is built using the **ESP8266 NodeMCU**, **PN532 NFC module**, **16x2
 - **Data Logging:** Excel via PLX-DAQ  
 - **Feedback:** Buzzer tone  
 
----
-
 ## Working Principle
 1. The user scans their RFID tag on the PN532 reader.  
 2. The ESP8266 identifies the tag and displays the user’s ID on the LCD.  
@@ -48,34 +40,37 @@ This system is built using the **ESP8266 NodeMCU**, **PN532 NFC module**, **16x2
 4. The SIM800L sends an SMS alert indicating the attendance status.  
 5. Data (ID, Date, Time) is simultaneously sent to **Excel via PLX-DAQ** for storage.  
 
----
+## UID Fetching and Student Registration
+To register students in the system, a separate Arduino code named **`UID_FETCH.ino`** is used.  
+This code reads the **unique UID** from each RFID tag using the **PN532 module** and displays it on the **Serial Monitor**.  
+
+You can then map each UID to corresponding **student details** such as:
+- Name  
+- Roll Number  
+- Department  
+- Contact Information  
+
+These details can be stored in your database or Excel sheet for automatic identification during attendance logging.
 
 ## Excel Logging Setup (PLX-DAQ)
 1. Download **PLX-DAQ v2** (Excel plugin for serial data logging).  
 2. Open Excel → Enable Macros → Open `PLX-DAQ Spreadsheet.xlsm`.  
 3. Set your COM port (same as Arduino Serial Port).  
-4. Start Data → Real-time attendance data will appear with **Name**, **Card ID**, **Date**, and **Time**.  
-
----
+4. Click **Start Data** → Real-time attendance data will appear with **Name**, **Card ID**, **Date**, and **Time**.  
 
 ## Required Arduino Libraries
 Install the following libraries via **Library Manager**:
-- `Wire.h`
-- `LiquidCrystal_I2C.h`
-- `Adafruit_PN532.h`
-- `SoftwareSerial.h`
-
----
+- `Wire.h`  
+- `LiquidCrystal_I2C.h`  
+- `Adafruit_PN532.h`  
+- `SoftwareSerial.h`  
 
 ## How to Run
 1. Connect all components as per the circuit diagram below.  
 2. Open Arduino IDE → Select **NodeMCU 1.0 (ESP-12E Module)**.  
-3. Upload the code provided below.  
+3. Upload the main project code.  
 4. Open PLX-DAQ in Excel and connect it to the correct COM port.  
-5. Scan RFID tags → Attendance will be displayed, logged in Excel, and SMS sent instantly.
-
-
----
+5. Scan RFID tags → Attendance will be displayed on the LCD, logged in Excel, and an SMS will be sent instantly.
 
 ## Future Enhancements
 - Integration with online cloud storage (Firebase, Google Sheets)  
@@ -83,14 +78,10 @@ Install the following libraries via **Library Manager**:
 - Face recognition for enhanced verification  
 - Battery backup integration  
 
----
 ## Author
-
-**Siddharth Chandra Prabhakar**<br> 
-Final year B.Tech (Electronics & Communication Engineering) <br>
-National Institute of Technology Sikkim
+**Siddharth Chandra Prabhakar**  
+Final year B.Tech (Electronics & Communication Engineering)  
+National Institute of Technology Sikkim  
 
 ## License
-
 This project is open-source and available under the MIT License.
-
